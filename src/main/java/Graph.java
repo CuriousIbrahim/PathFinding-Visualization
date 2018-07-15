@@ -1,4 +1,8 @@
+import java.util.List;
+
 public class Graph {
+
+
 
     private Node matrix[][];
 
@@ -12,9 +16,41 @@ public class Graph {
         }
     }
 
+    public Graph (List<Node> nodes) {
+
+        int highestX = 0;
+
+        for (Node node : nodes) {
+            if (node.getX() > highestX) {
+                highestX = node.getX();
+            }
+        }
+
+        int highestY = 0;
+
+        for (Node node: nodes) {
+            if (node.getY() > highestY) {
+                highestY = node.getY();
+            }
+        }
+
+        this.matrix = new Node[highestY][highestX];
+
+        for (Node node : nodes) {
+            this.matrix[node.getY()][node.getX()] = node;
+        }
+
+    }
+
     public Node getNode(int row, int column) {
         return this.matrix[row][column];
     }
+
+    public Node[] getNodesAdjacentTo(int row, int column) {
+
+    }
+
+    class
 
 
 
