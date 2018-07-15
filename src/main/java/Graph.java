@@ -7,6 +7,9 @@ public class Graph {
     private int rows;
     private int columns;
 
+    private Node start;
+    private Node end;
+
     public Graph(int row, int column) {
 
         this.rows = row;
@@ -72,6 +75,35 @@ public class Graph {
 
     }
 
+    public boolean setStartNode(int column, int row) {
+        Node node = getNode(row, column);
 
+        if (node == null) {
+            return false;
+        }
 
+        this.start = node;
+
+        return true;
+    }
+
+    public boolean setEndNode(int column, int row) {
+        Node node = getNode(row, column);
+
+        if (node == null) {
+            return false;
+        }
+
+        this.end = node;
+
+        return true;
+    }
+
+    public Node getStartNode() {
+        return start;
+    }
+
+    public Node getEndNode() {
+        return end;
+    }
 }
