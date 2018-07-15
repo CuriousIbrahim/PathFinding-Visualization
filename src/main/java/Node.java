@@ -1,9 +1,14 @@
 public class Node {
 
     // x & y - location
-    // g - cost from start node
-    // h - estimated cost from this to destination
-    private int x, y;
+    // w - weight (cost to move to this node)
+    private int x, y, w;
+
+    public Node(int x, int y, int w) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+    }
 
     public Node(int x, int y) {
         this.x = x;
@@ -26,4 +31,11 @@ public class Node {
         this.y = y;
    }
 
+    public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        this.w = w;
+    }
 }
