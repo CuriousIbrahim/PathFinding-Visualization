@@ -42,10 +42,10 @@ public class Graph {
             }
         }
 
-        this.rows = highestRow;
-        this.columns = highestColumn;
+        this.rows = highestRow + 1;
+        this.columns = highestColumn + 1;
 
-        this.matrix = new Node[highestRow][highestColumn];
+        this.matrix = new Node[highestRow+1][highestColumn+1];
 
         for (Node node : nodes) {
             this.matrix[node.getRow()][node.getColumn()] = node;
@@ -54,9 +54,14 @@ public class Graph {
     }
 
     public Node getNode(int row, int column) {
-        if (row >= this.rows && row < 0 && column >= this.columns && column < 0) {
+
+        System.out.println(row);
+        System.out.println(column);
+
+        if (row >= this.rows || row < 0 || column >= this.columns || column < 0) {
             return null;
         }
+
         return this.matrix[row][column];
     }
 
@@ -91,7 +96,7 @@ public class Graph {
         return true;
     }
 
-    public boolean setEndNode(int column, int row) {
+    public boolean setEndNode(int row, int column) {
         Node node = getNode(row, column);
 
         if (node == null) {
