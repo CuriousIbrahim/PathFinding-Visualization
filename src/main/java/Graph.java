@@ -26,29 +26,29 @@ public class Graph {
 
     public Graph (List<Node> nodes) {
 
-        int highestX = 0;
+        int highestRow = 0;
 
         for (Node node : nodes) {
-            if (node.getX() > highestX) {
-                highestX = node.getX();
+            if (node.getRow() > highestRow) {
+                highestRow = node.getRow();
             }
         }
 
-        int highestY = 0;
+        int highestColumn = 0;
 
         for (Node node: nodes) {
-            if (node.getY() > highestY) {
-                highestY = node.getY();
+            if (node.getColumn() > highestColumn) {
+                highestColumn = node.getColumn();
             }
         }
 
-        this.rows = highestY;
-        this.columns = highestX;
+        this.rows = highestRow;
+        this.columns = highestColumn;
 
-        this.matrix = new Node[highestY][highestX];
+        this.matrix = new Node[highestRow][highestColumn];
 
         for (Node node : nodes) {
-            this.matrix[node.getY()][node.getX()] = node;
+            this.matrix[node.getRow()][node.getColumn()] = node;
         }
 
     }
@@ -76,7 +76,7 @@ public class Graph {
     }
 
     public List<Node> getNodesAdjacentTo(Node node) {
-        return this.getNodesAdjacentTo(node.getY(), node.getX());
+        return this.getNodesAdjacentTo(node.getRow(), node.getColumn());
     }
 
     public boolean setStartNode(int column, int row) {

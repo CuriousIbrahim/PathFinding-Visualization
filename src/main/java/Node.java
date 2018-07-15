@@ -2,33 +2,33 @@ public class Node {
 
     // x & y - location
     // w - weight (cost to move to this node)
-    private int x, y, w;
+    private int row, column, w;
 
-    public Node(int x, int y, int w) {
-        this.x = x;
-        this.y = y;
+    public Node(int row, int column, int w) {
+        this.row = row;
+        this.column = column;
         this.w = w;
     }
 
-    public Node(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Node(int row, int column) {
+        this.row = row;
+        this.column = column;
     }
 
     public Node() {
     }
 
-    public int getX() {
-        return x;
+    public int getRow() {
+        return row;
     }
 
-    public int getY() {
-        return y;
+    public int getColumn() {
+        return column;
     }
 
-   public void setXY(int x, int y) {
-        this.x = x;
-        this.y = y;
+   public void setRowAndColumn(int row, int column) {
+        this.row = row;
+        this.column = column;
    }
 
     public int getW() {
@@ -40,8 +40,8 @@ public class Node {
     }
 
     public int getDistanceFrom (Node node) {
-        int x = this.x + node.x;
-        int y = this.y + node.x;
+        int x = this.row + node.row;
+        int y = this.column + node.column;
 
         return x + y;
     }
