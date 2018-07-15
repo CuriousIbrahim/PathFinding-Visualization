@@ -75,6 +75,10 @@ public class Graph {
 
     }
 
+    public List<Node> getNodesAdjacentTo(Node node) {
+        return this.getNodesAdjacentTo(node.getY(), node.getX());
+    }
+
     public boolean setStartNode(int column, int row) {
         Node node = getNode(row, column);
 
