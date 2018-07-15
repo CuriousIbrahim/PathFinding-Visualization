@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
@@ -56,9 +57,21 @@ public class Graph {
         return this.matrix[row][column];
     }
 
-    public Node[] getNodesAdjacentTo(int row, int column) {
+    public List<Node> getNodesAdjacentTo(int row, int column) {
+
+        List<Node> adjacentNodes = new ArrayList<>();
+
+        adjacentNodes.add(getNode(row-1, column));
+        adjacentNodes.add(getNode(row+1, column));
+        adjacentNodes.add(getNode(row, column-1));
+        adjacentNodes.add(getNode(row, column+1));
+
+        adjacentNodes.remove(null);
+
+        return adjacentNodes;
 
     }
+
 
 
 }
