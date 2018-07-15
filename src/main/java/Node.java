@@ -38,4 +38,11 @@ public class Node {
     public void setW(int w) {
         this.w = w;
     }
+
+    public int getDistanceFrom (Node node) {
+        int x = this.x + node.x;
+        int y = this.y + node.x;
+
+        return x + y;
+    }
 }
