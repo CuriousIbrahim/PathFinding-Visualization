@@ -45,4 +45,13 @@ public class Node {
 
         return x + y;
     }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "row=" + row +
+                ", column=" + column +
+                ", w=" + w +
+                '}';
+    }
 }
