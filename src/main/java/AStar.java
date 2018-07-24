@@ -22,6 +22,7 @@ public class AStar {
 
     private Map<Node, Integer> scoreForNode;
     private Map<Node, Integer> heuristicForNode;
+    private Map<Node, Integer> totalScoreForNode;
 
     public AStar(Graph graph) {
         this.graph = graph;
@@ -29,11 +30,84 @@ public class AStar {
         this.closedList = new ArrayList<>();
         this.scoreForNode = new HashMap<>();
         this.heuristicForNode = new HashMap<>();
+        this.totalScoreForNode = new HashMap<>();
         this.path = new ArrayList<>();
     }
 
-    private int calculateHeuristic(Node current) {
-        return current.getDistanceFrom(this.graph.getEndNode());
+    public void star() {
+
+        System.out.println("A Star Starting");
+
+
+        path.add(graph.getStartNode());
+
+        scoreForNode.put(graph.getStartNode(), 0);
+        openList.add(graph.getStartNode());
+
+        System.out.println("Start node is " + graph.getStartNode());
+
+        Node current = graph.getStartNode();
+
+        while (!openList.isEmpty()) {
+
+            System.out.println("Checking adjacent nodes to " + current);
+            List<Node> neighbours = graph.getNodesAdjacentTo(current);
+
+            for (Node neighbour : neighbours) {
+
+                if (closedList.contains(neighbour) || neighbour == null) {
+                    continue;
+                }
+
+                System.out.println("\t" + neighbour);
+
+                int score = neighbour.getW();                                   // Weight of neighbour
+                int heuristic = neighbour.getDistanceFrom(graph.getEndNode());  // Heuristic of neighbour
+
+                System.out.println("\t\tScore of " + neighbour + " is " + score);
+                System.out.println("\t\tHeuristic of " + neighbour + " is " + heuristic);
+                System.out.println("\t\tTotal score of " + neighbour + " is " + (score + heuristic));
+                scoreForNode.put(neighbour, score);
+                heuristicForNode.put(neighbour, heuristic);
+                totalScoreForNode.put(neighbour, score + heuristic);
+
+            }
+
+            Node cheapestNeighbour = neighbours.get(0);
+            System.out.println("Checking for cheapest neighbour");
+            for (Node node : neighbours) {
+                if (node != null) {
+                    System.out.println("Comparing " + cheapestNeighbour + " whose score is " +
+                            totalScoreForNode.get(cheapestNeighbour)+ " to " + node + " whose total score is " +
+                            totalScoreForNode.get(node));
+                    if (totalScoreForNode.get(cheapestNeighbour) > totalScoreForNode.get(node)) {
+                        cheapestNeighbour = node;
+                    } else {
+                        // Check if cheapestNeighbour is pointing to the same object
+                        if (cheapestNeighbour != node) {
+                            closedList.add(node);
+                        }
+                    }
+                }
+            }
+
+            System.out.println("Cheapest neighbour is " + cheapestNeighbour);
+
+            openList.remove(current);
+            closedList.add(current);
+
+            current = cheapestNeighbour;
+
+            openList.add(current);
+
+        }
+
+        System.out.println("Printing path:\n");
+
+        for (Node node : path)
+            System.out.println(node);
+
+
     }
 
 
