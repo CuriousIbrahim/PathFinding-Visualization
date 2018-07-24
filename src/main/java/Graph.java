@@ -55,9 +55,6 @@ public class Graph {
 
     public Node getNode(int row, int column) {
 
-        System.out.println(row);
-        System.out.println(column);
-
         if (row >= this.rows || row < 0 || column >= this.columns || column < 0) {
             return null;
         }
@@ -74,7 +71,11 @@ public class Graph {
         adjacentNodes.add(getNode(row, column-1));
         adjacentNodes.add(getNode(row, column+1));
 
-        adjacentNodes.remove(null);
+        for (int i = 0; i < adjacentNodes.size(); i++) {
+            if (adjacentNodes.get(i) == null) {
+                adjacentNodes.remove(i);
+            }
+        }
 
         return adjacentNodes;
 
