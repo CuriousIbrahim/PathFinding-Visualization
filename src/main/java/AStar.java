@@ -53,6 +53,8 @@ public class AStar {
             System.out.println("Checking adjacent nodes to " + current);
             List<Node> neighbours = graph.getNodesAdjacentTo(current);
 
+            System.out.println("neighbours: " + neighbours.toString());
+
             for (Node neighbour : neighbours) {
 
                 if (closedList.contains(neighbour) || neighbour == null) {
@@ -61,7 +63,7 @@ public class AStar {
 
                 System.out.println("\t" + neighbour);
 
-                int score = neighbour.getW();                                   // Weight of neighbour
+                int score = neighbour.getW() + getPathScore();                  // Weight of neighbour + path (Start to Current)
                 int heuristic = neighbour.getDistanceFrom(graph.getEndNode());  // Heuristic of neighbour
 
                 System.out.println("\t\tScore of " + neighbour + " is " + score);
@@ -71,12 +73,14 @@ public class AStar {
                 heuristicForNode.put(neighbour, heuristic);
                 totalScoreForNode.put(neighbour, score + heuristic);
 
+                System.out.println("totalScoreForNode: " + totalScoreForNode.toString());
+
             }
 
             Node cheapestNeighbour = neighbours.get(0);
             System.out.println("Checking for cheapest neighbour");
             for (Node node : neighbours) {
-                if (node != null) {
+                if (node != null && !node.equals(graph.getStartNode()) && !cheapestNeighbour.equals(graph.getStartNode())) {
                     System.out.println("Comparing " + cheapestNeighbour + " whose score is " +
                             totalScoreForNode.get(cheapestNeighbour)+ " to " + node + " whose total score is " +
                             totalScoreForNode.get(node));
@@ -96,6 +100,8 @@ public class AStar {
             openList.remove(current);
             closedList.add(current);
 
+            path.add(current);
+
             current = cheapestNeighbour;
 
             openList.add(current);
@@ -110,5 +116,15 @@ public class AStar {
 
     }
 
+    private int getPathScore() {
+
+        int total = 0;
+
+        for (Node node : path) {
+            total += node.getW();
+        }
+
+        return total;
+    }
 
 }
