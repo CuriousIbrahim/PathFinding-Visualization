@@ -34,6 +34,9 @@ public class AStar {
         this.path = new ArrayList<>();
     }
 
+
+    private int counter = 0;
+
     public void star() {
 
         System.out.println("A Star Starting");
@@ -48,10 +51,11 @@ public class AStar {
 
         Node current = graph.getStartNode();
 
-        while (!openList.isEmpty()) {
+        while (!openList.isEmpty() && counter < 8) {
 
             System.out.println("Checking adjacent nodes to " + current);
-            List<Node> neighbours = graph.getNodesAdjacentTo(current);
+            List<Node> neighbours = cleanNodeList(graph.getNodesAdjacentTo(current));
+
 
             System.out.println("neighbours: " + neighbours.toString());
 
@@ -106,6 +110,8 @@ public class AStar {
 
             openList.add(current);
 
+            counter++;
+
         }
 
         System.out.println("Printing path:\n");
@@ -125,6 +131,19 @@ public class AStar {
         }
 
         return total;
+    }
+
+    private List<Node> cleanNodeList(List<Node> nodes) {
+
+        List<Node> toReturn = new ArrayList<>();
+
+        for (Node node : nodes) {
+            if (node != null && !node.equals(graph.getStartNode()))
+                toReturn.add(node);
+        }
+
+        return toReturn;
+
     }
 
 }
