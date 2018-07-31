@@ -81,20 +81,29 @@ public class AStar {
 
             }
 
-            Node cheapestNeighbour = neighbours.get(0);
+            Node cheapestNeighbour = null;
+            for (Node node : neighbours) {
+                if (!closedList.contains(node) && node != null) {
+                    cheapestNeighbour = node;
+                    break;
+                }
+            }
             System.out.println("Checking for cheapest neighbour");
             for (Node node : neighbours) {
-                if (node != null && !node.equals(graph.getStartNode()) && !cheapestNeighbour.equals(graph.getStartNode())) {
-                    System.out.println("Comparing " + cheapestNeighbour + " whose score is " +
-                            totalScoreForNode.get(cheapestNeighbour)+ " to " + node + " whose total score is " +
-                            totalScoreForNode.get(node));
-                    if (totalScoreForNode.get(cheapestNeighbour) > totalScoreForNode.get(node)) {
-                        cheapestNeighbour = node;
-                    } else {
-                        // Check if cheapestNeighbour is pointing to the same object
-                        if (cheapestNeighbour != node) {
-                            closedList.add(node);
-                        }
+
+                if (closedList.contains(node) || node == null) {
+                    continue;
+                }
+
+                System.out.println("Comparing " + cheapestNeighbour + " whose score is " +
+                        totalScoreForNode.get(cheapestNeighbour)+ " to " + node + " whose total score is " +
+                        totalScoreForNode.get(node));
+                if (totalScoreForNode.get(cheapestNeighbour) > totalScoreForNode.get(node)) {
+                    cheapestNeighbour = node;
+                } else {
+                    // Check if cheapestNeighbour is pointing to the same object
+                    if (cheapestNeighbour != node) {
+                        closedList.add(node);
                     }
                 }
             }
@@ -109,6 +118,8 @@ public class AStar {
             current = cheapestNeighbour;
 
             openList.add(current);
+
+            System.out.println("Closed List: " + closedList);
 
             counter++;
 
