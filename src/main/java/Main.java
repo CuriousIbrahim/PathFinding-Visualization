@@ -34,7 +34,7 @@ public class Main {
         Graph graph = new Graph(nodes);
 
         graph.setStartNode(1, 0);
-        graph.setEndNode(0, 2);
+        graph.setEndNode(1, 3);
 
         AStar aStar = new AStar(graph);
 
