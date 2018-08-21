@@ -118,6 +118,7 @@ public class AStar {
 
             if (current.equals(graph.getEndNode())) {
                 System.out.println("current == endNode : " + current + " == " + graph.getEndNode());
+                path.add(current);
                 break;
             }
         }
