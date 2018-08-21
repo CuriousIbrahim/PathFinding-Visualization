@@ -131,6 +131,10 @@ public class AStar {
 
     }
 
+    public List<Node> getPath() {
+        return path;
+    }
+
     public int getPathCost() {
 
         int total = 0;
