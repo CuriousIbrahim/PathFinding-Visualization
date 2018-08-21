@@ -62,7 +62,7 @@ public class AStar {
 
                 System.out.println("\t" + neighbour);
 
-                int score = neighbour.getW() + getPathScore();                  // Weight of neighbour + path (Start to Current)
+                int score = neighbour.getW() + getPathCost();                  // Weight of neighbour + path (Start to Current)
                 int heuristic = neighbour.getDistanceFrom(graph.getEndNode());  // Heuristic of neighbour
 
                 System.out.println("\t\tScore of " + neighbour + " is " + score);
@@ -131,13 +131,16 @@ public class AStar {
 
     }
 
-    private int getPathScore() {
+    private int getPathCost() {
 
         int total = 0;
 
         for (Node node : path) {
             total += node.getW();
         }
+
+        // This is because the score includes the startNode. Subtracting the total by 1 will compensate for that.
+        total-=1;
 
         return total;
     }
