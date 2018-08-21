@@ -131,7 +131,7 @@ public class AStar {
 
     }
 
-    private int getPathCost() {
+    public int getPathCost() {
 
         int total = 0;
 
