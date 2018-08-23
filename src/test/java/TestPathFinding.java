@@ -29,21 +29,9 @@ public class TestPathFinding {
         actual.add(new Node(0, 3, 1));
         actual.add(new Node(1, 3, 1));
 
-        System.out.println();
-
-        // After printing the test and actual, they look the exact same, yet it keeps stating that they are not.
-        // I don't know why!
-        for (int i = 0; i < actual.size(); i++) {
-            System.out.println(aStar.getPath().get(i) + "\t\t\t" + actual.get(i));
-        }
-
-        System.out.println(aStar.getPath().equals(actual));
-
         assertTrue(aStar.getPath().equals(actual));
 
     }
-
-
 
     public AStar path1() {
         List<Node> nodes = new ArrayList<>();

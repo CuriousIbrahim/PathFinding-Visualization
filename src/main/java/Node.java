@@ -54,4 +54,19 @@ public class Node {
                 ", w=" + w +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        Node node;
+
+        if (obj instanceof Node) {
+            node = (Node) obj;
+        } else {
+            return false;
+        }
+
+        return this.row == node.row && this.column == node.column;
+
+    }
 }
